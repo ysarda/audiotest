@@ -1,0 +1,15 @@
+/home/ysarda/audiotest/AudioTest/bin/Debug/net7.0/AudioTest
+/home/ysarda/audiotest/AudioTest/bin/Debug/net7.0/AudioTest.deps.json
+/home/ysarda/audiotest/AudioTest/bin/Debug/net7.0/AudioTest.runtimeconfig.json
+/home/ysarda/audiotest/AudioTest/bin/Debug/net7.0/AudioTest.dll
+/home/ysarda/audiotest/AudioTest/bin/Debug/net7.0/AudioTest.pdb
+/home/ysarda/audiotest/AudioTest/obj/Debug/net7.0/AudioTest.csproj.AssemblyReference.cache
+/home/ysarda/audiotest/AudioTest/obj/Debug/net7.0/AudioTest.GeneratedMSBuildEditorConfig.editorconfig
+/home/ysarda/audiotest/AudioTest/obj/Debug/net7.0/AudioTest.AssemblyInfoInputs.cache
+/home/ysarda/audiotest/AudioTest/obj/Debug/net7.0/AudioTest.AssemblyInfo.cs
+/home/ysarda/audiotest/AudioTest/obj/Debug/net7.0/AudioTest.csproj.CoreCompileInputs.cache
+/home/ysarda/audiotest/AudioTest/obj/Debug/net7.0/AudioTest.dll
+/home/ysarda/audiotest/AudioTest/obj/Debug/net7.0/refint/AudioTest.dll
+/home/ysarda/audiotest/AudioTest/obj/Debug/net7.0/AudioTest.pdb
+/home/ysarda/audiotest/AudioTest/obj/Debug/net7.0/AudioTest.genruntimeconfig.cache
+/home/ysarda/audiotest/AudioTest/obj/Debug/net7.0/ref/AudioTest.dll
