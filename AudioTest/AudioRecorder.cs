@@ -24,13 +24,13 @@ class AudioRecorder
 
     public bool IsRecording => isRecording;
 
-    public void StartRecording(string outputPath = "")
+    public void StartRecording(string outputPath = "", string baseAudioSoftware = "alsa")
     {
         if (!isRecording)
         {
             isRecording = true;
             memoryStream.SetLength(0); // Clear the memory stream
-            process.StartInfo.Arguments = $"-f alsa -i default {outputPath}";
+            process.StartInfo.Arguments = $"-f {baseAudioSoftware} -i default {outputPath}";
             process.Start();
 
             process.OutputDataReceived += (sender, e) =>

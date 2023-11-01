@@ -1,0 +1,5 @@
+/home/ysarda/audiotest/AudioTest/bin/Debug/net7.0/publish/AudioTest
+/home/ysarda/audiotest/AudioTest/bin/Debug/net7.0/publish/AudioTest.dll
+/home/ysarda/audiotest/AudioTest/bin/Debug/net7.0/publish/AudioTest.deps.json
+/home/ysarda/audiotest/AudioTest/bin/Debug/net7.0/publish/AudioTest.runtimeconfig.json
+/home/ysarda/audiotest/AudioTest/bin/Debug/net7.0/publish/AudioTest.pdb
