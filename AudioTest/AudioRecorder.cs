@@ -55,10 +55,15 @@ class AudioRecorder
         {
             isRecording = false;
             process.Kill();
-            process.WaitForExit();
             return memoryStream.ToArray();
         }
 
         return Array.Empty<byte>();
+    }
+
+    public void Dispose()
+    {
+        process.Dispose();
+        memoryStream.Dispose();
     }
 }

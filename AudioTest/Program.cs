@@ -37,6 +37,7 @@ class Program
 
         // Stop recording and get the audio buffer
         byte[] audioBuffer = audioRecorder.StopRecording();
+        audioRecorder.Dispose();
 
         if (audioBuffer != null)
         {
