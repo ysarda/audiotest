@@ -5,7 +5,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        AudioRecorder audioRecorder = new AudioRecorder();
+        AudioRecorder audioRecorder = new();
         Dictionary<string, string> baseAudioSoftware = new Dictionary<string, string>()
         {
             { "0", "alsa" },
@@ -41,14 +41,19 @@ class Program
 
         if (audioBuffer != null)
         {
-            Console.WriteLine($"Recording stopped. Audio saved to {outputPath}");
-
-            // Save the audio buffer to a file (for testing)
-            File.WriteAllBytes("recorded_audio_buffer.wav", audioBuffer);
+            if (File.Exists(outputPath))
+            {
+                Console.WriteLine($"Recording stopped. Audio saved to {outputPath}");
+            }
+            else{
+                Console.WriteLine("Recording stopped. Audio buffer is not null, but the file was not saved.");
+            }
         }
         else
         {
             Console.WriteLine("No audio recorded.");
         }
+
+        
     }
 }
