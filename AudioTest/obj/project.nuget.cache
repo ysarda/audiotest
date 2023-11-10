@@ -1,14 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "AYVu00BoIGhaqbNV/Rt6ZKXrqGy+AY2i+VkdRo4jEOfkTxlkKViayeFvH2SOuCz5OSRaGo8h8A8UHIeABeTgTw==",
+  "dgSpecHash": "OFCXhhfVN7jpcsrIPqNypZ+sG7FQfsrLwyVHlNabIXMkH1NsT3OMm4vEY0TeGbiutVn+oAfi15tLzYY3xVDobg==",
   "success": true,
   "projectFilePath": "/home/ysarda/audiotest/AudioTest/AudioTest.csproj",
   "expectedPackageFiles": [
-    "/home/ysarda/.nuget/packages/cliwrap/3.6.4/cliwrap.3.6.4.nupkg.sha512",
-    "/home/ysarda/.nuget/packages/ffmpegcore/5.1.0/ffmpegcore.5.1.0.nupkg.sha512",
-    "/home/ysarda/.nuget/packages/instances/3.0.0/instances.3.0.0.nupkg.sha512",
-    "/home/ysarda/.nuget/packages/system.text.encodings.web/7.0.0/system.text.encodings.web.7.0.0.nupkg.sha512",
-    "/home/ysarda/.nuget/packages/system.text.json/7.0.2/system.text.json.7.0.2.nupkg.sha512"
+    "/home/ysarda/.nuget/packages/cliwrap/3.6.4/cliwrap.3.6.4.nupkg.sha512"
   ],
   "logs": []
 }

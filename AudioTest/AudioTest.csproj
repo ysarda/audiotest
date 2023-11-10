@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <PackageReference Include="CliWrap" Version="3.6.4" />
-    <PackageReference Include="FFMpegCore" Version="5.1.0" />
   </ItemGroup>
 
 </Project>
