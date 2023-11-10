@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "SsrH5hRQn8FYcky1lYpAQaP+jDcY2h6ijZokAkaDTxLXcd3lRFlgx6Ah1pwZdD5RU5KSeLDesp5418bKw9pDOg==",
+  "dgSpecHash": "OFCXhhfVN7jpcsrIPqNypZ+sG7FQfsrLwyVHlNabIXMkH1NsT3OMm4vEY0TeGbiutVn+oAfi15tLzYY3xVDobg==",
   "success": true,
   "projectFilePath": "/home/ysarda/audiotest/AudioTest/AudioTest.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/home/ysarda/.nuget/packages/cliwrap/3.6.4/cliwrap.3.6.4.nupkg.sha512"
+  ],
   "logs": []
 }

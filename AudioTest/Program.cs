@@ -1,59 +1,44 @@
 using System;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 class Program
 {
     static void Main(string[] args)
     {
-        AudioRecorder audioRecorder = new();
-        Dictionary<string, string> baseAudioSoftware = new Dictionary<string, string>()
+        var outputPath = "output.wav"; // Specify the output path if needed
+
+        using var audioRecorder = new AudioRecorder();
+        bool spaceBarPressed = false;
+        Console.WriteLine("Starting FFMPEG");
+        audioRecorder.StartFfmpeg("alsa");
+
+        Console.WriteLine("Press the space bar to start recording. Press it again to stop.");
+        while (true)
         {
-            { "0", "alsa" },
-            { "1", "dshow" },
-            { "2", "avfoundation" }
-        };
-
-        Console.WriteLine("Press 0 for Linux, 1 for Windows, or 2 for macOS.");
-        string? input = Console.ReadLine();
-        
-        if (input is null || 0 > int.Parse(input) || int.Parse(input) > 2)
-        {
-            Console.WriteLine("Invalid input. Press Enter to exit.");
-            Console.ReadLine();
-            return;
-        }
-
-        Console.WriteLine($"Using {baseAudioSoftware[input.ToString()]} as the base audio software.");
-        Console.WriteLine("Press Enter to start recording...");
-        Console.ReadLine();
-
-        string outputPath = "recorded_audio.wav";
-
-        // Start recording
-        Console.WriteLine("Recording... Press Enter to stop recording.");
-        audioRecorder.StartRecording(outputPath, baseAudioSoftware[input.ToString()]);
-
-        Console.ReadLine(); // Press Enter to stop recording
-
-        // Stop recording and get the audio buffer
-        byte[] audioBuffer = audioRecorder.StopRecording();
-        audioRecorder.Dispose();
-
-        if (audioBuffer != null)
-        {
-            if (File.Exists(outputPath))
+            if (Console.KeyAvailable)
             {
-                Console.WriteLine($"Recording stopped. Audio saved to {outputPath}");
+                var key = Console.ReadKey(true);
+                if (key.Key == ConsoleKey.Spacebar)
+                {
+                    spaceBarPressed = !spaceBarPressed;
+                    if (spaceBarPressed)
+                    {
+                        Console.WriteLine("Recording...");
+                        audioRecorder.StartRecording();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Stopped recording.");
+                        byte[] audioBytes = audioRecorder.StopRecording();
+                        Console.WriteLine($"Audio length: {audioBytes.Length}");
+                        File.WriteAllBytes(outputPath, audioBytes);
+                        Console.WriteLine($"Saved audio to {outputPath}");
+                    }
+                }
             }
-            else{
-                Console.WriteLine("Recording stopped. Audio buffer is not null, but the file was not saved.");
-            }
-        }
-        else
-        {
-            Console.WriteLine("No audio recorded.");
         }
 
-        
     }
 }
