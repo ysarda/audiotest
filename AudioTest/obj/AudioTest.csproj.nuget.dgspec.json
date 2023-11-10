@@ -41,6 +41,10 @@
             "CliWrap": {
               "target": "Package",
               "version": "[3.6.4, )"
+            },
+            "FFMpegCore": {
+              "target": "Package",
+              "version": "[5.1.0, )"
             }
           },
           "imports": [

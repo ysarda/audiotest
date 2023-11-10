@@ -11,9 +11,6 @@ class Program
 
         using var audioRecorder = new AudioRecorder();
         bool spaceBarPressed = false;
-        Console.WriteLine("Starting FFMPEG");
-        audioRecorder.StartFfmpeg("alsa");
-
         Console.WriteLine("Press the space bar to start recording. Press it again to stop.");
         while (true)
         {
@@ -25,12 +22,10 @@ class Program
                     spaceBarPressed = !spaceBarPressed;
                     if (spaceBarPressed)
                     {
-                        Console.WriteLine("Recording...");
-                        audioRecorder.StartRecording();
+                        audioRecorder.StartRecording("alsa");
                     }
                     else
                     {
-                        Console.WriteLine("Stopped recording.");
                         byte[] audioBytes = audioRecorder.StopRecording();
                         Console.WriteLine($"Audio length: {audioBytes.Length}");
                         File.WriteAllBytes(outputPath, audioBytes);

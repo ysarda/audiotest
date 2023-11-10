@@ -18,11 +18,12 @@ public class AudioRecorder : IDisposable
         _audioBytes = Array.Empty<byte>();
     }
 
-    public void StartFfmpeg(string baseAudioSoftware = "alsa")
+    public void StartRecording(string baseAudioSoftware = "alsa")
     {
+        _audioStream = new MemoryStream();
         _cancellationTokenSource = new CancellationTokenSource();
 
-        _ffmpegCommand = Cli.Wrap("ffmpeg")
+        (Cli.Wrap("ffmpeg")
             .WithArguments(args => args
                 .Add("-f").Add(baseAudioSoftware)
                 .Add("-i").Add("default")
@@ -30,59 +31,20 @@ public class AudioRecorder : IDisposable
                 .Add("pipe:1")
             )
             .WithValidation(CommandResultValidation.None)
-            | PipeTarget.Null;
-        var runEvent = ReturnCommandEvent();
-    }
-
-    public async Task ReturnCommandEvent()
-    {
-        if (_ffmpegCommand == null)
-        {
-            throw new Exception("FFMPEG command is null");
-        }
-        await foreach (var cmdEvent in _ffmpegCommand.ListenAsync(_cancellationTokenSource.Token))
-        {
-            switch (cmdEvent)
-            {
-                case StartedCommandEvent started:
-                    Console.WriteLine($"Process started; ID: {started.ProcessId}");
-                    break;
-                case StandardOutputCommandEvent stdOut:
-                    if (_isRecording)
-                    {
-                        _audioStream.Write(Encoding.UTF8.GetBytes(stdOut.Text));
-                    }
-                    break;
-                case StandardErrorCommandEvent stdErr:
-                    break;
-                case ExitedCommandEvent exited:
-                    Console.WriteLine($"Process exited; Code: {exited.ExitCode}");
-                    break;
-            }
-        }
-    }
-    public void StartRecording()
-    {
-        _isRecording = true;
-        ClearStream();
+            | PipeTarget.ToStream(_audioStream))
+            .ExecuteAsync(_cancellationTokenSource.Token);
+        Console.WriteLine("Recording...");
     }
     public byte[] StopRecording()
     {
-        
-        _isRecording = false;
+        _cancellationTokenSource.Cancel();
+        _cancellationTokenSource.Dispose();
         var result = _audioStream.ToArray();
-        ClearStream();
+        Console.WriteLine("Stopped recording.");
         return result;
     }
     public void Dispose()
     {
-        _cancellationTokenSource.Cancel();
-        _cancellationTokenSource.Dispose();
         _audioStream.Dispose();
-    }
-
-    public void ClearStream()
-    {
-        _audioStream = new MemoryStream();
     }
 }
