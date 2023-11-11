@@ -22,7 +22,7 @@ class Program
                     spaceBarPressed = !spaceBarPressed;
                     if (spaceBarPressed)
                     {
-                        audioRecorder.StartRecording("alsa");
+                        audioRecorder.StartRecording();
                     }
                     else
                     {

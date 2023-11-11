@@ -18,14 +18,14 @@ public class AudioRecorder : IDisposable
         _audioBytes = Array.Empty<byte>();
     }
 
-    public void StartRecording(string baseAudioSoftware = "alsa")
+    public void StartRecording()
     {
         _audioStream = new MemoryStream();
         _cancellationTokenSource = new CancellationTokenSource();
 
         (Cli.Wrap("ffmpeg")
             .WithArguments(args => args
-                .Add("-f").Add(baseAudioSoftware)
+                .Add("-f").Add(GetOsInput())
                 .Add("-i").Add("default")
                 .Add("-f").Add("wav")
                 .Add("pipe:1")
@@ -46,5 +46,11 @@ public class AudioRecorder : IDisposable
     public void Dispose()
     {
         _audioStream.Dispose();
+    }
+
+    private string GetOsInput()
+    {
+        // If Mac, return avfoundation, if Linux return alsa, if Windows return dshow
+        return OperatingSystem.IsMacOS() ? "avfoundation" : OperatingSystem.IsLinux() ? "alsa" : "dshow";
     }
 }
