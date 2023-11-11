@@ -15,5 +15,3 @@
 /home/ysarda/audiotest/AudioTest/obj/Debug/net7.0/ref/AudioTest.dll
 /home/ysarda/audiotest/AudioTest/bin/Debug/net7.0/CliWrap.dll
 /home/ysarda/audiotest/AudioTest/obj/Debug/net7.0/AudioTest.csproj.CopyComplete
-/home/ysarda/audiotest/AudioTest/bin/Debug/net7.0/FFMpegCore.dll
-/home/ysarda/audiotest/AudioTest/bin/Debug/net7.0/Instances.dll
