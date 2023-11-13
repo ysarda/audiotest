@@ -1,6 +1,5 @@
-﻿using System.Text;
-using CliWrap;
-using CliWrap.EventStream;
+﻿using CliWrap;
+
 public class AudioRecorder : IDisposable
 {
     private CancellationTokenSource _cancellationTokenSource;
