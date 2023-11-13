@@ -5,13 +5,11 @@ public class AudioRecorder : IDisposable
 {
     private CancellationTokenSource _cancellationTokenSource;
     private MemoryStream _audioStream;
-    private CommandTask<CommandResult>? _ffmpegCommand;
 
     public AudioRecorder()
     {
         _cancellationTokenSource = new CancellationTokenSource();
         _audioStream = new MemoryStream();
-        _ffmpegCommand = null;
     }
 
     public void StartRecording()
@@ -19,7 +17,7 @@ public class AudioRecorder : IDisposable
         _audioStream = new MemoryStream();
         _cancellationTokenSource = new CancellationTokenSource();
 
-        _ffmpegCommand = (Cli.Wrap("ffmpeg")
+        var _ffmpegCommand = (Cli.Wrap("ffmpeg")
             .WithArguments(args => args
                 .Add("-f").Add(GetOsInput())
                 .Add("-i").Add("default")
