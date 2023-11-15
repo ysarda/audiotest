@@ -1,47 +1,23 @@
 using CliWrap;
 
-public class AudioPlayer : IDisposable
+public class AudioPlayer
 {
     private MemoryStream? _audioStream;
     private CancellationTokenSource? _cancellationTokenSource;
-    private Task? _ffplayProcess;
-    private const string NamedPipePath = "pipe";
+    private Command? _ffplayProcess;
 
-    public void SetupPlay()
+    public async Task PlayAudio(byte[] audioBytes)
     {
         _cancellationTokenSource = new CancellationTokenSource();
-        Cli.Wrap("mkfifo")
+        _audioStream = new MemoryStream(audioBytes);
+        _ffplayProcess = PipeSource.FromStream(_audioStream) |
+            Cli.Wrap("ffplay")
             .WithArguments(args => args
-                .Add(NamedPipePath)
-            )
-            .WithValidation(CommandResultValidation.None)
-            .ExecuteAsync(CancellationToken.None);
-        Cli.Wrap("ffplay")
-            .WithArguments(args => args
-                .Add("-i").Add(NamedPipePath)
+                .Add("-i").Add("pipe:0")
                 .Add("-nodisp")
-            )
-            .WithValidation(CommandResultValidation.None)
-            .ExecuteAsync(CancellationToken.None);
+                .Add("-autoexit")
+            );
+        await _ffplayProcess.ExecuteAsync(_cancellationTokenSource.Token);
+        Console.WriteLine("Audio playback complete.");
     }
-    public static void StreamAudio(byte[] audioData)
-    {
-        try
-        {
-            using var pipeStream = new FileStream(NamedPipePath, FileMode.Open, FileAccess.Write);
-            pipeStream.Write(audioData, 0, audioData.Length);
-            Console.WriteLine("Wrote " + audioData.Length + " bytes to named pipe.");
-            Task.Delay(audioData.Length / 10).Wait();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error writing to named pipe: " + ex.Message);
-        }
-    }
-
-        public void Dispose()
-    {
-        throw new System.NotImplementedException();
-    }
-
 }
