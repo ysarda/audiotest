@@ -1,7 +1,7 @@
 
 class AudioRecorderTest
 {
-    static void Run()
+    public static void Run()
     {
         using var audioRecorder = new AudioRecorder();
         bool spaceBarPressed = false;
